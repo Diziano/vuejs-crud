@@ -2,6 +2,8 @@
   <div class="home">
     <h1>Projects</h1>
 
+    <router-link :to="{name: 'projectInsert'}">Inserir</router-link>
+
     <table>
         <thead>
             <tr>
@@ -15,12 +17,13 @@
                 <td>{{ project.id }}</td>
                 <td>{{ project.title }}</td>
                 <td><a href="#">Edit</a></td>
-                <td><a href="#">Delete</a></td>
+                <td><a href="#" @click="deleteProject(project.id)">Delete</a></td>
             </tr>
         </tbody>
 
     </table>
 
+    <router-view name="children"/>
   </div>
 </template>
 
@@ -37,8 +40,6 @@ export default {
     },
     methods: {
         getProjects() {
-            console.log('Obtem dados da API');
-        
             this.$http.get('http://localhost:3000/projects').then(
                 (data) => {
                     this.projects = data.body;
@@ -48,7 +49,19 @@ export default {
                     console.log(error);
                 }
             );
-        }  
+        },
+        deleteProject(id) {
+            if (!confirm("Deseja deletar o registro?")) {
+                return ;
+            }
+
+            this.$http.delete('http://localhost:3000/projects/'+id).then(
+                (data) => {
+                    alert('Deletado id ' + id);
+                    this.getProjects();
+                }
+            )
+        } 
     },
     mounted () {
         this.getProjects();

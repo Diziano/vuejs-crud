@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Projects from './views/Projects.vue'
+import ProjectForm from './views/ProjectForm.vue';
 
 Vue.use(Router)
 
@@ -17,7 +18,12 @@ export default new Router({
     {
       path: '/projects',
       name: 'projects',
-      component: Projects
+      component: Projects,
+    },
+    {
+      path: '/projects/insert',
+      name: 'projectInsert',
+      component: ProjectForm
     },
     {
       path: '/about',
