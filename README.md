@@ -27,3 +27,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Start Fake API
+./node_modules/json-server/lib/cli/bin.js --watch db.json
